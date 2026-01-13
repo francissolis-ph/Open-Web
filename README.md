@@ -1,2 +1,2 @@
 # Open-Web
-This is a personal project of mine to develop a Web Information System.
+This is a personal project to develop a Web Information System.
