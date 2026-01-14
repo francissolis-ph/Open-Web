@@ -1,17 +1,16 @@
-<?php
-$serverName = "192.168.9.240"; // or "127.0.0.1\\SQLEXPRESS"
-$connectionOptions = [
-    "Database" => "nch",
-    "Uid" => "sa",
-    "PWD" => "R00t"
-];
+<?php 
 
-// Establish connection
-$conn = sqlsrv_connect($serverName, $connectionOptions);
+$svr = "localhost";
+$userName = "root";
+$passWord = '';
+$db = 'test';
 
-if ($conn) {
-    return "Connection established.<br />";
-} else {
-    echo "Connection failed.<br />";
-    die(print_r(sqlsrv_errors(), true));
-}
+$conn = new mysqli($svr, $userName, $passWord, $db);
+
+// if ($conn->connect_error) {
+//     echo "connection error!" . $conn->connect_error; 
+// } else {
+//     echo "connection success!";
+// }
+
+?>
