@@ -1,140 +1,140 @@
-// Utility function to deactivate all toggles
-function deactivateAll() {
-  const ids = [
-    "topBarMenuIcon",
-    "navBarListHome",
-    "navBarListTransaction",
-    "navBarListQuery",
-    "navBarListReference",
-    "navBarListSystem",
-    "navBarListReport",
-  ];
+// // Utility function to deactivate all toggles
+// function deactivateAll() {
+//   const ids = [
+//     "topBarMenuIcon",
+//     "navBarListHome",
+//     "navBarListTransaction",
+//     "navBarListQuery",
+//     "navBarListReference",
+//     "navBarListSystem",
+//     "navBarListReport",
+//   ];
 
-  ids.forEach((id) => {
-    document.getElementById(id).classList.remove("iconToggle");
-  });
-}
+//   ids.forEach((id) => {
+//     document.getElementById(id).classList.remove("iconToggle");
+//   });
+// }
 
-function hideSlides() {
-  const hideIds = [
-    "contentAreaMenu",
-    "contentAreaTransaction",
-    "contentAreaReport",
-    "contentAreaQuery",
-    "contentAreaReference",
-    "contentAreaSystem",
-  ];
+// function hideSlides() {
+//   const hideIds = [
+//     "contentAreaMenu",
+//     "contentAreaTransaction",
+//     "contentAreaReport",
+//     "contentAreaQuery",
+//     "contentAreaReference",
+//     "contentAreaSystem",
+//   ];
 
-  hideIds.forEach((id) => {
-    document.getElementById(id).classList.remove("showSlides");
-  });
-}
+//   hideIds.forEach((id) => {
+//     document.getElementById(id).classList.remove("showSlides");
+//   });
+// }
 
-function disableContent() {
-  const disableContent = document.querySelector("#contentAreaForm");
-  disableContent.setAttribute("inert", "");
-  disableContent.classList.add("contentAreaDisable");
-}
-function enableContent() {
-  const disableContent = document.querySelector("#contentAreaForm");
-  disableContent.removeAttribute("inert");
-  disableContent.classList.remove("contentAreaDisable");
-}
+// function disableContent() {
+//   const disableContent = document.querySelector("#contentAreaForm");
+//   disableContent.setAttribute("inert", "");
+//   disableContent.classList.add("contentAreaDisable");
+// }
+// function enableContent() {
+//   const disableContent = document.querySelector("#contentAreaForm");
+//   disableContent.removeAttribute("inert");
+//   disableContent.classList.remove("contentAreaDisable");
+// }
 
-function toggleNav(id, contentId) {
-  deactivateAll();
-  hideSlides();
-  disableContent();
-  document.getElementById(contentId).classList.toggle("showSlides");
-  document.getElementById(id).classList.toggle("iconToggle");
-}
+// function toggleNav(id, contentId) {
+//   deactivateAll();
+//   hideSlides();
+//   disableContent();
+//   document.getElementById(contentId).classList.toggle("showSlides");
+//   document.getElementById(id).classList.toggle("iconToggle");
+// }
 
-document.getElementById("navBarListHome").classList.toggle("iconToggle");
+// document.getElementById("navBarListHome").classList.toggle("iconToggle");
 
-// Example: topBarMenuIcon click
-function navBarListHome() {
-  // deactivate others
-  deactivateAll();
-  hideSlides();
-  enableContent();
-  document.getElementById("navBarListHome").classList.toggle("iconToggle");
-}
+// // Example: topBarMenuIcon click
+// function navBarListHome() {
+//   // deactivate others
+//   deactivateAll();
+//   hideSlides();
+//   enableContent();
+//   document.getElementById("navBarListHome").classList.toggle("iconToggle");
+// }
 
-function windowTopBarMenu() {
-  const menuElement = document.getElementById("contentAreaMenu");
+// function windowTopBarMenu() {
+//   const menuElement = document.getElementById("contentAreaMenu");
 
-  if (window.matchMedia("(min-width: 1023px)").matches) {
-    menuElement.classList.remove("contentAreaSlides");
-    menuElement.classList.add("contentAreaSlidesMenu");
-  } else {
-    menuElement.classList.remove("contentAreaSlidesMenu");
-    menuElement.classList.add("contentAreaSlides");
-  }
-}
+//   if (window.matchMedia("(min-width: 1023px)").matches) {
+//     menuElement.classList.remove("contentAreaSlides");
+//     menuElement.classList.add("contentAreaSlidesMenu");
+//   } else {
+//     menuElement.classList.remove("contentAreaSlidesMenu");
+//     menuElement.classList.add("contentAreaSlides");
+//   }
+// }
 
-function topBarMenuIcon() {
-  toggleNav("topBarMenuIcon", "contentAreaMenu");
-}
+// function topBarMenuIcon() {
+//   toggleNav("topBarMenuIcon", "contentAreaMenu");
+// }
 
-// Add this to handle responsiveness
-// isama mo to parati incase na need mo ng loading or resizing sa mga web system function, fe: si doctor, nagsave, load, and nasa same state parin ng page, dapat ito nakakabit sa javascript.
-window.addEventListener("resize", windowTopBarMenu);
-window.addEventListener("load", windowTopBarMenu);
+// // Add this to handle responsiveness
+// // isama mo to parati incase na need mo ng loading or resizing sa mga web system function, fe: si doctor, nagsave, load, and nasa same state parin ng page, dapat ito nakakabit sa javascript.
+// window.addEventListener("resize", windowTopBarMenu);
+// window.addEventListener("load", windowTopBarMenu);
 
-function navBarListTransaction() {
-  toggleNav("navBarListTransaction", "contentAreaTransaction");
-}
+// function navBarListTransaction() {
+//   toggleNav("navBarListTransaction", "contentAreaTransaction");
+// }
 
-function navBarListQuery() {
-  toggleNav("navBarListQuery", "contentAreaQuery");
-}
+// function navBarListQuery() {
+//   toggleNav("navBarListQuery", "contentAreaQuery");
+// }
 
-function navBarListReference() {
-  toggleNav("navBarListReference", "contentAreaReference");
-}
+// function navBarListReference() {
+//   toggleNav("navBarListReference", "contentAreaReference");
+// }
 
-function navBarListSystem() {
-  toggleNav("navBarListSystem", "contentAreaSystem");
-}
+// function navBarListSystem() {
+//   toggleNav("navBarListSystem", "contentAreaSystem");
+// }
 
-function navBarListReport() {
-  toggleNav("navBarListReport", "contentAreaReport");
-}
+// function navBarListReport() {
+//   toggleNav("navBarListReport", "contentAreaReport");
+// }
 
-function getPhilippinesTimeFormatted() {
-  const options = {
-    timeZone: "Asia/Manila",
-    weekday: "long", // e.g. Tuesday
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true, // AM/PM format
-  };
+// function getPhilippinesTimeFormatted() {
+//   const options = {
+//     timeZone: "Asia/Manila",
+//     weekday: "long", // e.g. Tuesday
+//     year: "numeric",
+//     month: "2-digit",
+//     day: "2-digit",
+//     hour: "2-digit",
+//     minute: "2-digit",
+//     second: "2-digit",
+//     hour12: true, // AM/PM format
+//   };
 
-  const formatter = new Intl.DateTimeFormat("en-US", options);
-  const parts = formatter.formatToParts(new Date());
+//   const formatter = new Intl.DateTimeFormat("en-US", options);
+//   const parts = formatter.formatToParts(new Date());
 
-  // Build custom format: Tuesday, MM/dd/yyyy HH:mm:ss AM/PM
-  const weekday = parts.find((p) => p.type === "weekday").value;
-  const month = parts.find((p) => p.type === "month").value;
-  const day = parts.find((p) => p.type === "day").value;
-  const year = parts.find((p) => p.type === "year").value;
-  const hour = parts.find((p) => p.type === "hour").value;
-  const minute = parts.find((p) => p.type === "minute").value;
-  const second = parts.find((p) => p.type === "second").value;
-  const dayPeriod = parts.find((p) => p.type === "dayPeriod").value;
+//   // Build custom format: Tuesday, MM/dd/yyyy HH:mm:ss AM/PM
+//   const weekday = parts.find((p) => p.type === "weekday").value;
+//   const month = parts.find((p) => p.type === "month").value;
+//   const day = parts.find((p) => p.type === "day").value;
+//   const year = parts.find((p) => p.type === "year").value;
+//   const hour = parts.find((p) => p.type === "hour").value;
+//   const minute = parts.find((p) => p.type === "minute").value;
+//   const second = parts.find((p) => p.type === "second").value;
+//   const dayPeriod = parts.find((p) => p.type === "dayPeriod").value;
 
-  return `${weekday}, ${month}/${day}/${year} ${hour}:${minute}:${second} ${dayPeriod}`;
-}
+//   return `${weekday}, ${month}/${day}/${year} ${hour}:${minute}:${second} ${dayPeriod}`;
+// }
 
-function showTime() {
-  document.getElementById("phTime").textContent = getPhilippinesTimeFormatted();
-}
+// function showTime() {
+//   document.getElementById("phTime").textContent = getPhilippinesTimeFormatted();
+// }
 
-setInterval(showTime, 1000);
+// setInterval(showTime, 1000);
 
 //  === TEST AREA ===   //
 
@@ -142,10 +142,18 @@ setInterval(showTime, 1000);
 // const contentAreaForm = document.getElementById("contentAreaForm");
 // contentAreaForm.append("Hello there,", " World!");
 
+//==========================================================//
+//                                                          //
+//==========================================================//
+
 // maliban sa div, pwede ka maglagay ng mga iba't ibang elements mo dito.
 // const div = document.createElement("div");
 //hindi mo makita tong append div, kasi sa console mo sya makikita na na-create.
 // contentAreaForm.append(div);
+
+//==========================================================//
+//                                                          //
+//==========================================================//
 
 // kinuha ko yung ID ng div container para ma-specify ko yung kukunin kong text content/inner text, kasi kung hindi ko i-specify, hindi saakin ibibigay yung exact need kong output na ilabas.
 // const divContent = document.querySelector("#contentAreaItem");
@@ -157,6 +165,10 @@ setInterval(showTime, 1000);
 
 // contentAreaForm.append(divContentTextContent);
 
+//==========================================================//
+//                                                          //
+//==========================================================//
+
 // function contentAreaSubmit() {
 //  most powerful tool! pwede ka mag-select ng kahit anong element dito, best case is select mo yung ID and pwede mo i-manipulate sa lahat ng pwedeng capability ni JS.
 //   const fullName = document.querySelector("#fullName").value;
@@ -167,6 +179,10 @@ setInterval(showTime, 1000);
 //     console.log("false");
 //   }
 //}
+
+//==========================================================//
+//                                                          //
+//==========================================================//
 
 //  dito pwede mo i-select yung gusto mong attributes based sa pinili mong query, sa makita mo ang pinili ko ay yung ID which is #fullName.
 // const fullName = document.querySelector("#fullName");
@@ -191,6 +207,10 @@ setInterval(showTime, 1000);
 //   console.log(langResult);
 // });
 
+//==========================================================//
+//                                                          //
+//==========================================================//
+
 // Example dataset (like dw_1 in PowerBuilder)
 // const dw_1 = [
 //   { checkbox: "1", userID: "U001" },
@@ -211,24 +231,11 @@ setInterval(showTime, 1000);
 //   }
 // }
 
-{
-  /* <script>
-    function checkUsers() {
-      // Get all checkboxes inside the table
-      const checkboxes = document.querySelectorAll('#dw_1 input[type="checkbox"]');
+//==========================================================//
+//                                                          //
+//==========================================================//
 
-      // Loop through each checkbox
-      checkboxes.forEach(cb => {
-        if (cb.checked) {
-          // Equivalent of getItemString(i, 'userID')
-          const userID = cb.value;
-          alert("User ID: " + userID); // Equivalent of messageBox
-        }
-      });
-    }
-  </script> */
-}
-
+//  checkbox - tick checker.
 // function checkUsers() {
 //   const contentAreaFormTable = document.querySelectorAll(
 //     '#contentAreaFormTable input[type="checkbox"]'
@@ -245,3 +252,64 @@ setInterval(showTime, 1000);
 //   console.clear();
 //   checkUsers();
 // });
+
+//==========================================================//
+//                                                          //
+//==========================================================//
+
+// const contentArea = document.getElementById("content-area");
+
+//gamitin mo pang-hanap ng mga class sa mga element-- best use for ternary/ifelse
+// console.log(contentArea.classList.contains("sample-class-name")); //false
+// console.log(contentArea.classList.contains("content-area")); //true
+
+//==========================================================//
+//                                                          //
+//==========================================================//
+
+// const isContent = contentArea.classList.contains("sample-class-name");
+// isContent ? console.log("true!") : console.log("false!");
+
+//==========================================================//
+//                                                          //
+//==========================================================//
+
+//  VERY IMPORTANT!! get click ID...
+// document.querySelector("#nav-bar").addEventListener("click", function (e) {
+//   console.log(e.target.getAttribute("id") + " was clicked");
+
+//   const target = e.target;
+//   //  "matches" must match to element you want to be clicked.
+//   target.matches("i") ? console.log(true) : console.log(false);
+// });
+
+//==========================================================//
+//                                                          //
+//==========================================================//
+
+//  generate random array value to DOM Elements.
+// // Get DOM elements
+// let quoteElement = document.getElementsByClassName("quote")[0];
+// let personElement = document.getElementsByClassName("person")[0];
+// let button = document.getElementById("quoteButton");
+
+// // Array of quotes as objects
+// const quoteArray = [
+//   { quote: "I gave you all I had.", person: "Arthur Morgan" },
+//   { quote: "I had a goddamn plan!", person: "Dutch van der Linde" },
+//   {
+//     quote: "Sad thing is good people do bad things.",
+//     person: "Hosea Matthews",
+//   },
+// ];
+
+// // Event listener for button
+// button.addEventListener("click", function () {
+//   let random = Math.floor(Math.random() * quoteArray.length);
+//   quoteElement.textContent = quoteArray[random].quote;
+//   personElement.textContent = quoteArray[random].person;
+// });
+
+//==========================================================//
+//                                                          //
+//==========================================================//
