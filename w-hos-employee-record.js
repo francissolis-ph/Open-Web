@@ -6,7 +6,11 @@ function showSlides(id) {
 const buttonSlides = document.querySelector("#btn-slides");
 buttonSlides.addEventListener("click", function () {
   showSlides("ca-home-form-card");
-  buttonSlides.textContent === "Show Employee Form"
-    ? (buttonSlides.textContent = "Hide Employee Form")
-    : (buttonSlides.textContent = "Show Employee Form");
+
+  const buttonName = buttonSlides.innerText;
+  if (buttonName === "Show Employee Form") {
+    buttonSlides.innerText = "Hide Employee Form";
+  } else {
+    buttonSlides.innerText = "Show Employee Form";
+  }
 });
