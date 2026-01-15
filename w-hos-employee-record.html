@@ -1,94 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Open Web</title>
-    <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="w-hos-employee-record.css" />
-    <script src="index.js" defer></script>
-    <script src="w-hos-employee-record.js" defer></script>
-    <script src="jsCheatSheet.js" defer></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-  </head>
 
-  <body>
-    <header class="master-header" id="master-header">
-      <div class="mh-top">
-        <a href="">HOME</a>
-        <div class="mh-top-right">
-          <p>
-            Welcome! <mark><em>PASTE USER NAME!</em></mark>
-          </p>
-          <a href="">LOGOUT</a>
-        </div>
-      </div>
-      <div class="mh-bottom">
-        <div class="mh-bottom-left">
-          <p>
-            An open source web information system by:
-            <strong
-              ><a class="mh-bottom-left-name" href=""
-                >Francis L. Solis</a
-              ></strong
-            >
-          </p>
-          <h1 class="mh-bottom-title">Open Web Information System</h1>
-          <p>Feel free to use my template and maybe learn something about it</p>
-        </div>
-        <div class="mh-bottom-right">
-          <p>Philippines Standard Time:</p>
-          <p id="ph-time"></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Web</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="w-hos-employee-record.css">
+  <script src="w-hos-employee-record.js" defer></script>
+  <script src="index.js" defer></script>
+  <script src="jsCheatSheet.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
 
-          <script></script>
-        </div>
+<body>
+  <header class="master-header" id="master-header">
+    <div class="mh-top">
+      <a href="">HOME</a>
+      <div class="mh-top-right">
+        <p>
+          Welcome! <mark><em>PASTE USER NAME!</em></mark>
+        </p>
+        <a href="">LOGOUT</a>
       </div>
-    </header>
-    <nav class="nav-bar" id="nav-bar">
-      <i title="Home" id="fa-home" class="fas fa-home nav-button"></i>
-      <i
-        title="Transactions"
-        id="fa-exchange-alt"
-        class="fas fa-exchange-alt nav-button"
-      ></i>
-      <i
-        title="Reference Tables"
-        id="fa-table"
-        class="fas fa-table nav-button"
-      ></i>
-      <i title="Settings" id="fa-gear" class="fas fa-gear nav-button"></i>
-    </nav>
-    <main class="content-area" id="content-area">
-      <div id="ca-home" class="ca-home">
-        <div id="ca-home-form-card" class="ca-home-form-card">
-          <div id="ca-home-top" class="ca-home-top">
-            <form class="ca-home-top-form" action="" method="post">
-              <div class="form-left"></div>
-              <div class="form-right"></div>
-            </form>
+    </div>
+    <div class="mh-bottom">
+      <div class="mh-bottom-left">
+        <p>
+          An open source web information system by:
+          <strong><a class="mh-bottom-left-name" href="">Francis L. Solis</a></strong>
+        </p>
+        <h1 class="mh-bottom-title">Open Web Information System</h1>
+        <p>Feel free to use my template and maybe learn something about it</p>
+      </div>
+      <div class="mh-bottom-right">
+        <p>Philippines Standard Time:</p>
+        <p id="ph-time"></p>
+
+        <script></script>
+      </div>
+    </div>
+  </header>
+  <nav class="nav-bar" id="nav-bar">
+    <i title="Home" id="fa-home" class="fas fa-home nav-button"></i>
+    <i title="Transactions" id="fa-exchange-alt" class="fas fa-exchange-alt nav-button"></i>
+    <i title="Reference Tables" id="fa-table" class="fas fa-table nav-button"></i>
+    <i title="Settings" id="fa-gear" class="fas fa-gear nav-button"></i>
+  </nav>
+  <main class="content-area" id="content-area">
+    <div id="ca-home" class="ca-home">
+      <form action="" method="post">
+        <div id="form-slide-card" class="form-slide-card">
+          <div class="form-top">
+            <div class="form-top-inputs">
+              <div>
+                <div class="input-box" id="input-box">
+                  <span>User ID</span>
+                  <input type="text" class="form-input-text" name="userID">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>Last Name</span>
+                  <input type="text" class="form-input-text" name="lastName">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>First Name</span>
+                  <input type="text" class="form-input-text" name="firstName">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>Middle Name</span>
+                  <input type="text" class="form-input-text" name="middleName">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>Suffix</span>
+                  <input type="text" class="form-input-text" name="suffix">
+                </div>
+              </div>
+              <div>
+                <div class="input-box" id="input-box">
+                  <span>Email Address</span>
+                  <input type="email" class="form-input-text" name="userEmail">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>Phone Number</span>
+                  <input type="number" class="form-input-text" name="userNumber">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>Date of Birth</span>
+                  <input type="date" class="form-input-text" name="birthDate">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>Gender</span>
+                  <div class="input-box-radio">
+                    <span>Male</span>
+                    <div class="input-box-radio-sex" id="user-sex-male" data-sex="male">
+                      <i class="fa fa-mars" aria-hidden="true" id="user-sex-male" data-sex="Male"></i>
+                    </div>
+                    <span>Female</span>
+                    <div class="input-box-radio-sex" id="user-sex-female" data-sex="female">
+                      <i class="fa fa-venus" aria-hidden="true" data-sex="Female"></i>
+                    </div>
+                  </div>
+                  <input type="radio" class="form-input-radio" name="userSex" value="M">
+                  <input type="radio" class="form-input-radio" name="userSex" value="F">
+                </div>
+              </div>
+              <div>
+                <div class="input-box" id="input-box">
+                  <span>Username</span>
+                  <input type="text" class="form-input-text" name="userName">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>Password</span>
+                  <input type="password" class="form-input-text" name="userPass">
+                </div>
+                <div class="input-box" id="input-box">
+                  <span>Employment Status</span>
+                  <input type="radio" class="form-input-radio" name="userStat" value="A">
+                  <input type="radio" class="form-input-radio" name="userStat" value="I">
+                </div>
+              </div>
+            </div>
           </div>
-          <div id="ca-home-bottom" class="ca-home-bottom">
-            <h2 class="ca-hb-title">Employee Record Log</h2>
-            <button id="btn-slides" class="btn-slides">
-              Show Employee Form
-            </button>
+          <div class="form-bottom">
+            <div>
+              <i class="fa-solid fa-users"></i>
+              <h2>Employee Record</h2>
+            </div>
+
+            <div id="form-bottom-toggle-container" class="form-bottom-toggle-container">
+              <div id="form-bottom-toggle-bg" class="form-bottom-toggle-bg"></div>
+              <div id="form-bottom-toggle-dot" class="form-bottom-toggle-dot"></div>
+            </div>
           </div>
         </div>
+      </form>
+    </div>
 
-        <div id="ca-home-table-card" class="ca-home-table-card">
-          <table id="ca-home-table" class="ca-home-table"></table>
-        </div>
-      </div>
+    <div id="ca-transaction" class="ca-cards ca-transaction"></div>
+    <div id="ca-table" class="ca-cards ca-table"></div>
+    <div id="ca-setting" class="ca-cards ca-setting"></div>
+  </main>
+  <footer class="standard-footer" id="standard-footer">
+    <p>&copy; 2026 Francis Solis. All rights reserved.</p>
+  </footer>
+</body>
 
-      <div id="ca-transaction" class="ca-cards ca-transaction"></div>
-      <div id="ca-table" class="ca-cards ca-table"></div>
-      <div id="ca-setting" class="ca-cards ca-setting"></div>
-    </main>
-    <footer class="standard-footer" id="standard-footer">
-      <p>&copy; 2026 Francis Solis. All rights reserved.</p>
-    </footer>
-  </body>
 </html>
