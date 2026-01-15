@@ -44,6 +44,10 @@
   min-height: 100%;
   transform: translateY(-40%);
 }
+.ca-home-top-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
 /* ================= */
 /* buttons */
@@ -57,7 +61,6 @@
   border-radius: 0.5rem;
   border: 1px solid gray;
 }
-.btn-slides:focus,
 .btn-slides:hover {
   background-color: steelblue;
   color: white;
@@ -65,6 +68,20 @@
 .btn-slides:active {
   background-color: orangered;
   color: white;
+}
+.ca-home-top-form {
+  display: grid;
+  grid-template-areas: "ca-tf-left ca-tf-right";
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+.form-left {
+  grid-area: ca-tf-left;
+  border: 1px solid black;
+}
+.form-right {
+  grid-area: ca-tf-right;
+  border: 1px solid black;
 }
 
 /* ================= */
