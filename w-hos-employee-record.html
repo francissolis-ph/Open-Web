@@ -71,7 +71,12 @@
                 <div class="form-top-inputs-groups">
                   <div class="input-box" id="input-box">
                     <span>User ID</span>
-                    <input type="text" class="form-input-text" name="userID" />
+                    <input
+                      type="text"
+                      class="form-input-text"
+                      name="userID"
+                      inert=""
+                    />
                   </div>
                   <div
                     class="input-box-col-2"
@@ -151,6 +156,7 @@
                       >
                         <i
                           class="fa fa-mars"
+                          id="fa-mars"
                           aria-hidden="true"
                           data-sex="Male"
                         ></i>
@@ -163,6 +169,7 @@
                       >
                         <i
                           class="fa fa-venus"
+                          id="fa-venus"
                           aria-hidden="true"
                           data-sex="Female"
                         ></i>
@@ -172,12 +179,14 @@
                       <input
                         type="radio"
                         class="form-input-radio"
+                        id="form-input-radio-male"
                         name="userSex"
                         value="M"
                       />
                       <input
                         type="radio"
                         class="form-input-radio"
+                        id="form-input-radio-female"
                         name="userSex"
                         value="F"
                       />
@@ -215,31 +224,43 @@
                       <span>Active</span>
                       <div
                         class="input-box-radio-stat"
-                        id="user-sex-male"
+                        id="user-stat-active"
                         data-sex="male"
-                      ></div>
+                      >
+                        <i class="fa-solid fa-check" id="fa-check"></i>
+                      </div>
                       <span>Inactive</span>
                       <div
                         class="input-box-radio-stat"
-                        id="user-sex-female"
+                        id="user-stat-inactive"
                         data-sex="female"
-                      ></div>
+                      >
+                        <i class="fa-solid fa-x" id="fa-x"></i>
+                      </div>
                     </div>
                     <div style="display: none">
                       <input
                         type="radio"
                         class="form-input-radio"
                         name="userStat"
+                        id="radio-user-stat-active"
                         value="A"
                       />
                       <input
                         type="radio"
                         class="form-input-radio"
                         name="userStat"
+                        id="radio-user-stat-inactive"
                         value="I"
                       />
                     </div>
                   </div>
+                </div>
+                <div class="form-buttons">
+                  <button type="submit" value="submit" class="submit">
+                    Submit
+                  </button>
+                  <button type="reset" class="reset">Reset</button>
                 </div>
               </fieldset>
             </div>
