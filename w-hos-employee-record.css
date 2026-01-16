@@ -1,129 +1,210 @@
+/* --- 1. Variables & Root --- */
+:root {
+  --primary-gradient: linear-gradient(90deg, #f8ff00 0%, #3ad59f 100%);
+  --bg-overlay: rgba(255, 255, 255, 0.5);
+  --bg-light: rgba(240, 240, 240);
+  --border-color: lightgray;
+  --shadow-soft: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  --shadow-inset: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  --shadow-button: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  --transition-speed: 0.3s ease-in-out;
+  --radius-lg: 1.5rem;
+}
+
+/* --- 2. Layout Containers --- */
 .ca-home {
   height: 100%;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--bg-overlay);
 }
+
 .ca-home form {
   background-color: white;
   height: 100%;
   width: 100%;
 }
+
+/* --- 3. The Sliding Card --- */
 .form-slide-card {
-  background-color: white;
+  display: grid;
+  grid-template-areas: "form-top" "form-bottom";
+  grid-template-rows: 85% 15%;
+
   height: 85%;
   width: 100%;
-  display: grid;
-  grid-template-areas:
-    "form-top"
-    "form-bottom";
-  grid-template-rows: 85% 15%;
-  transition: transform 0.3s ease-in-out;
+  background-color: white;
+  box-shadow: var(--shadow-soft);
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+
+  transition: transform var(--transition-speed);
   transform: translateY(-85%);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  border-bottom-left-radius: 1.5rem;
-  border-bottom-right-radius: 1.5rem;
 }
+
 .form-slide-card.enable {
   transform: translateY(0%);
 }
+
+/* --- 4. Form Sections (Top & Bottom) --- */
 .form-top {
   grid-area: form-top;
   height: 100%;
+  padding: 1.5rem;
   border: 1px solid white;
-  padding: 10px;
 }
 .form-top-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 5%;
+  height: 100%;
 }
-.input-box span {
-  display: block;
-  padding: 5px;
-  font-family: monospace;
-}
-.form-input-text {
-  height: 30px;
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
-    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
-  border: 1px solid lightgray;
-  border-radius: 1.5rem;
-  width: 300px;
-  padding: 0 10px;
-}
-.input-box-radio {
+.form-top-inputs-groups {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.input-box-col-2 {
+  display: flex;
+  gap: 3%;
+  align-items: center;
+}
+.input-box {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 .input-box-radio-sex {
   background-color: white;
-  height: 30px;
   width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   cursor: pointer;
-  border-radius: 50%;
 }
-.input-box-radio-sex i {
-  color: rgba(180, 180, 180);
-  font-size: 16px;
+.input-box-radio-stat {
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  position: relative;
+  cursor: pointer;
 }
+.fa-mars,
+.fa-venus {
+  color: rgba(50, 50, 50);
+}
+span {
+  font-size: 14px;
+  font-family: monospace;
+}
+
+.form-input-text {
+  width: 100%;
+  height: 30px;
+  border-radius: 0.5rem;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  border: 1px solid lightgray;
+  padding: 0 5px;
+  font-family: monospace;
+}
+.form-top-inputs {
+  font-size: 18px;
+  font-family: monospace;
+  font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
+    rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
+    rgba(0, 0, 0, 0.07) 0px 16px 16px;
+  border: 1px solid lightgray;
+}
+.form-top-inputs legend {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 0.75rem;
+  border: 1px solid lightgray;
+}
+
+/* --- */
+
+/* --- */
+
 .form-bottom {
-  background-color: rgba(240, 240, 240);
   grid-area: form-bottom;
-  height: 100%;
-  border-top: 1px solid rgba(220, 220, 220);
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  height: 100%;
   padding: 0 2%;
+  background-color: var(--bg-light);
+  border-top: 1px solid rgba(220, 220, 220);
 }
+
+.form-bottom h2 {
+  font-family: monospace;
+}
+
 .form-bottom div {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.form-bottom h2 {
-  font-family: monospace;
-}
+
+/* --- 5. Inputs & Controls --- */
+
+/* Radio Buttons */
+
+/* --- 6. The Toggle Component --- */
 .form-bottom-toggle-container {
-  background-color: white;
-  height: 40px;
-  width: 80px;
-  border-radius: 1.5rem;
   position: relative;
-  overflow: hidden;
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
-    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
-  border: 1px solid lightgray;
-}
-.form-bottom-toggle-bg {
-  background: linear-gradient(90deg, #f8ff00 0%, #3ad59f 100%);
   height: 40px;
   width: 80px;
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(-75%);
-  border-top-right-radius: 1.5rem;
-  border-bottom-right-radius: 1.5rem;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-inset);
+  overflow: hidden;
 }
+
+.form-bottom-toggle-bg {
+  height: 40px;
+  width: 80px;
+  background: var(--primary-gradient);
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+  transition: transform var(--transition-speed);
+  transform: translateX(-75%);
+}
+
 .form-bottom-toggle-bg.enable {
   transform: translateX(0%);
 }
+
 .form-bottom-toggle-dot {
-  background-color: white;
-  height: 40px;
-  width: 40px;
-  border-radius: 1.5rem;
   position: absolute;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   top: 0;
   left: 0;
-  transition: transform 0.3s ease-in-out;
-  transform: translatex(0%);
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-button);
+  transition: transform var(--transition-speed);
+  transform: translateX(0%);
 }
+
 .form-bottom-toggle-dot.enable {
   transform: translateX(100%);
 }
