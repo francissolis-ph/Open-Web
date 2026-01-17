@@ -172,3 +172,54 @@ function validateForm() {
 
   return isValidate;
 }
+
+// data row stat color change
+
+const tableDataStat = document.querySelectorAll(".table-data-stat");
+
+tableDataStat.forEach((element) => {
+  const dataStat = element.textContent.trim();
+  if (dataStat === "Active") {
+    element.classList.remove("enable");
+  } else if (dataStat === "Inactive") {
+    element.classList.add("enable");
+  }
+});
+
+//  checkbox - tick checker.
+// function checkUsers() {
+//   const contentAreaFormTable = document.querySelectorAll(
+//     '#contentAreaFormTable input[type="checkbox"]'
+//   );
+
+//   contentAreaFormTable.forEach((cb) => {
+//     const userID = cb.value;
+//     cb.checked ? console.log("Number " + userID + " row was selected!") : "";
+//   });
+// }
+
+// const tableButton = document.querySelector("#table-button");
+// tableButton.addEventListener("click", function () {
+//   console.clear();
+//   checkUsers();
+// });
+
+const searchButtonId = document.querySelector("#search-input");
+searchButtonId.addEventListener("keydown", (Event) => {
+  if (Event.key === "Enter") {
+    console.log("keydown!");
+  }
+});
+
+const editButtons = document.querySelectorAll(".table-action-edit");
+
+editButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    //  get row number and pwede mo kunin yung same row column value nya, parang...
+    //  dw_1.getitem(i) sa powerscript.
+    const row = btn.closest("tr"); // or ".table-row"
+    const employeeId = row.querySelector(".table-employee-number").textContent.trim();
+    console.log(employeeId);
+  });
+});
+

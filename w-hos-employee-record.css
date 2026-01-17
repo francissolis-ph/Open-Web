@@ -4,12 +4,14 @@
   --bg-overlay: rgba(255, 255, 255, 0.5);
   --bg-light: rgba(240, 240, 240);
   --border-color: lightgray;
-  --shadow-soft: rgba(0, 0, 0, 0.16) 0px 3px 6px,
-    rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  --shadow-inset: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+  --shadow-soft:
+    rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  --shadow-inset:
+    rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
-  --shadow-button: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  --shadow-button:
+    rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   --transition-speed: 0.3s ease-in-out;
   --radius-lg: 1.5rem;
 }
@@ -19,12 +21,7 @@
   height: 100%;
   width: 100%;
   background-color: var(--bg-overlay);
-}
-
-.ca-home form {
-  background-color: white;
-  height: 100%;
-  width: 100%;
+  position: relative;
 }
 
 /* --- 3. The Sliding Card --- */
@@ -35,7 +32,7 @@
 
   height: fit-content;
   width: 100%;
-  height: 95%;
+  height: 90%;
   background-color: white;
   box-shadow: var(--shadow-soft);
   border-bottom-left-radius: var(--radius-lg);
@@ -43,6 +40,11 @@
 
   transition: transform var(--transition-speed);
   transform: translateY(-85%);
+
+  position: absolute;
+  z-index: 900;
+
+  overflow: hidden;
 }
 
 .form-slide-card.enable {
@@ -53,7 +55,7 @@
 .form-top {
   grid-area: form-top;
   height: 100%;
-  padding: .5rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border: 1px solid white;
   overflow-y: auto;
 }
@@ -86,8 +88,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  box-shadow:
+    rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   cursor: pointer;
 }
 .input-box-radio-stat {
@@ -98,8 +102,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  box-shadow:
+    rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   position: relative;
   cursor: pointer;
 }
@@ -143,7 +149,8 @@ span {
   width: 100%;
   height: 25px;
   border-radius: 1rem;
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+  box-shadow:
+    rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
   border: 1px solid lightgray;
   padding: 0 10px;
@@ -154,11 +161,16 @@ span {
 .form-input-text.enable {
   border: 2px solid red;
 }
+.form-input-text:focus {
+  outline: none;
+  border: 1.5px solid orangered;
+}
 .form-top-inputs {
   font-size: 18px;
   font-family: monospace;
   font-weight: bold;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   border: 1px solid lightgray;
   height: fit-content;
@@ -241,11 +253,6 @@ span {
   color: white;
 }
 
-/* --- 5. Inputs & Controls --- */
-
-/* Radio Buttons */
-
-/* --- 6. The Toggle Component --- */
 .form-bottom-toggle-container {
   position: relative;
   height: 40px;
@@ -286,4 +293,129 @@ span {
 
 .form-bottom-toggle-dot.enable {
   transform: translateX(100%);
+}
+
+/* =================================== */
+
+.table-card {
+  height: 85%;
+  width: 100%;
+  position: absolute;
+  top: 15%;
+  left: 0;
+  padding: 1%;  
+  display: grid;
+  grid-template-areas:
+    "table-top"
+    "table-bottom";
+  grid-template-rows: .20fr 1fr;
+}
+.table-card-top {
+  grid-area: table-top;
+  background-color: whitesmoke;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border: 1px solid lightgray;
+  box-shadow: var(--shadow-soft);
+}
+.table-card-bottom{
+  grid-area: table-bottom;
+  background-color: white;
+  height: 100%;
+  overflow-y: auto;
+  border-top: 1px solid gray;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border: 1px solid lightgray;
+  box-shadow: var(--shadow-soft);
+}
+.table-card-bottom-table {
+  height: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-card-bottom-table th {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: rgba(220, 220, 220);
+  height: 40px;
+  font-family: monospace;
+  font-size: .9rem;
+}
+.table-card-bottom-table th:first-child {
+  border-bottom-left-radius: 1rem;
+}
+.table-card-bottom-table th:nth-child(1):hover, .table-card-bottom-table th:nth-child(2):hover, .table-card-bottom-table th:nth-child(3):hover, .table-card-bottom-table th:nth-child(4):hover {
+  background-color: rgb(200, 200, 200);
+  cursor: pointer;
+}
+.table-card-bottom-table th:last-child {
+  border-bottom-right-radius: 1rem;
+}
+.table-card-bottom-table td:nth-child(2), .table-card-bottom-table td:nth-child(3), .table-card-bottom-table td:nth-child(4) {
+  font-weight: 600;
+}
+.table-card-bottom-table td {
+  text-align: center;
+  word-wrap: break-word;
+  border-bottom: 1px solid gray;
+  font-family: monospace;
+}
+.table-action-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  padding: 0 10px;
+  gap: 10px;
+}
+.table-action-list li {
+  border: 1px solid lightgray;
+  padding: 5px;
+  border-radius: 1rem;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.table-action-list li i {
+  font-size: 16px;
+}
+.table-action-list li:nth-child(1):hover {
+  background: darkgreen;
+  color: white;
+}
+.table-action-list li:nth-child(2):hover {
+  background: steelblue;
+  color: white;
+}
+.table-action-list li:nth-child(3):hover {
+  background: maroon;
+  color: white;
+}
+/* changing stat color */
+.table-data-stat {
+  background-color: darkgreen;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 1rem;
+  font-weight: bold;
+}
+.table-data-stat.enable {
+  background-color: maroon;
+}
+
+/* ======================================= */
+
+.table-card-top {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.table-card-top-left div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 500px;
 }
