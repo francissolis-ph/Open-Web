@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="w-hos-employee-record.css" />
     <script src="w-hos-employee-record.js" defer></script>
     <script src="index.js" defer></script>
-    <script src="jsCheatSheet.js" defer></script>
+    <!-- <script src="jsCheatSheet.js" defer></script> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -63,7 +63,7 @@
     </nav>
     <main class="content-area" id="content-area">
       <div id="ca-home" class="ca-home">
-        <form action="" method="post">
+        <form id="employee-record-form" action="" method="post" onsubmit="return validateForm();">
           <div id="form-slide-card" class="form-slide-card">
             <div class="form-top">
               <fieldset class="form-top-inputs">
@@ -75,7 +75,7 @@
                       type="text"
                       class="form-input-text"
                       name="userID"
-                      inert=""
+                      readonly
                     />
                   </div>
                   <div
@@ -87,9 +87,12 @@
                       <input
                         type="text"
                         class="form-input-text"
-                        name="lastName"
+                        name="last-name"
+                        id="last-name"
                         placeholder="e.g., Doe"
+                        maxlength="50"
                       />
+
                     </div>
                     <div class="input-box" id="input-box">
                       <span>Suffix</span>
@@ -97,6 +100,8 @@
                         type="text"
                         class="form-input-text"
                         name="suffix"
+                        id="suffix"
+                        maxlength="10"
                       />
                     </div>
                   </div>
@@ -105,8 +110,10 @@
                     <input
                       type="text"
                       class="form-input-text"
-                      name="firstName"
+                      name="first-name"
+                      id="first-name"
                       placeholder="e.g., John"
+                      maxlength="50"
                     />
                   </div>
                   <div class="input-box" id="input-box">
@@ -114,7 +121,9 @@
                     <input
                       type="text"
                       class="form-input-text"
-                      name="middleName"
+                      name="middle-name"
+                      id="middle-name"
+                      maxlength="50"
                     />
                   </div>
                 </div>
@@ -124,8 +133,10 @@
                     <input
                       type="email"
                       class="form-input-text"
-                      name="userEmail"
+                      name="user-mail"
+                      id="user-mail"
                       placeholder="e.g., sample-email@gmail.com"
+                      maxlength="250"
                     />
                   </div>
                   <div class="input-box" id="input-box">
@@ -133,8 +144,10 @@
                     <input
                       type="number"
                       class="form-input-text"
-                      name="userNumber"
+                      name="user-number"
+                      id="user-number"
                       placeholder="####-###-####"
+                      maxlength="11"
                     />
                   </div>
                   <div class="input-box" id="input-box">
@@ -142,7 +155,8 @@
                     <input
                       type="date"
                       class="form-input-text"
-                      name="birthDate"
+                      name="birth-date"
+                      id="birth-date"
                     />
                   </div>
                   <div class="input-box" id="input-box">
@@ -175,19 +189,20 @@
                         ></i>
                       </div>
                     </div>
+                    <span id="radio-sex-error" class="radio-sex-error">Please Select Gender!<i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
                     <div style="display: none">
                       <input
                         type="radio"
                         class="form-input-radio"
                         id="form-input-radio-male"
-                        name="userSex"
+                        name="user-sex"
                         value="M"
                       />
                       <input
                         type="radio"
                         class="form-input-radio"
                         id="form-input-radio-female"
-                        name="userSex"
+                        name="user-sex"
                         value="F"
                       />
                     </div>
@@ -199,7 +214,9 @@
                     <input
                       type="text"
                       class="form-input-text"
-                      name="userName"
+                      id="user-name"
+                      name="user-name"
+                      maxlength="50"
                     />
                   </div>
                   <div class="input-box" id="input-box">
@@ -207,15 +224,20 @@
                     <input
                       type="password"
                       class="form-input-text"
-                      name="userPass"
+                      id="user-pass"
+                      name="user-pass"
                     />
+                  </div>
+                  <div style="display: flex; justify-content: end;" id="pass-val-mess">
+
                   </div>
                   <div class="input-box" id="input-box">
                     <span>Confirm Password</span>
                     <input
                       type="password"
                       class="form-input-text"
-                      name="userPass-confirm"
+                      id="user-pass-confirm"
+                      name="user-pass-confirm"
                     />
                   </div>
                   <div class="input-box" id="input-box">
@@ -238,18 +260,19 @@
                         <i class="fa-solid fa-x" id="fa-x"></i>
                       </div>
                     </div>
+                    <span id="radio-stat-error" class="radio-stat-error">Please Select Status!<i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
                     <div style="display: none">
                       <input
                         type="radio"
                         class="form-input-radio"
-                        name="userStat"
+                        name="user-stat"
                         id="radio-user-stat-active"
                         value="A"
                       />
                       <input
                         type="radio"
                         class="form-input-radio"
-                        name="userStat"
+                        name="user-stat"
                         id="radio-user-stat-inactive"
                         value="I"
                       />
@@ -257,7 +280,7 @@
                   </div>
                 </div>
                 <div class="form-buttons">
-                  <button type="submit" value="submit" class="submit">
+                  <button type="submit" class="submit">
                     Submit
                   </button>
                   <button type="reset" class="reset">Reset</button>

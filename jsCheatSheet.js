@@ -313,3 +313,71 @@
 //==========================================================//
 //                                                          //
 //==========================================================//
+
+//  validation notes.
+document.getElementById("registerForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // stop form submission
+
+  const username = document.getElementById("username").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const age = document.getElementById("age").value;
+  const errorMsg = document.getElementById("errorMsg");
+
+  errorMsg.textContent = "";
+
+  if (username === "") {
+    errorMsg.textContent = "Username is required.";
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    errorMsg.textContent = "Please enter a valid email address.";
+    return;
+  }
+
+  if (password.length < 6) {
+    errorMsg.textContent = "Password must be at least 6 characters.";
+    return;
+  }
+
+  if (age === "" || age < 18) {
+    errorMsg.textContent = "Age must be 18 or above.";
+    return;
+  }
+
+  alert("Form submitted successfully!");
+});
+
+
+function validateEmail(email) {
+  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return pattern.test(email);
+}
+
+//==========================================================//
+//                                                          //
+//==========================================================//
+
+function validateForm() {
+  let username = document.getElementById("username").value.trim();
+  let email = document.getElementById("email").value.trim();
+
+  if (username === "") {
+    alert("Username is required");
+    return false;
+  }
+
+  if (email === "") {
+    alert("Email is required");
+    return false;
+  }
+
+  if (!email.includes("@")) {
+    alert("Invalid email format");
+    return false;
+  }
+
+  // validation passed → submit form
+  return true;
+}

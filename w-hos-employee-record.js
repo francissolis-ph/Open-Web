@@ -20,6 +20,13 @@ toggleButton.addEventListener("click", () => {
 //   }
 // });
 
+const resetButton = document
+  .querySelector(".reset")
+  .addEventListener("click", function () {
+    disableSexRadio();
+    disableStatRadio();
+  });
+
 function disableSexRadio() {
   document.getElementById("user-sex-male").style.backgroundColor = "#ffffff";
   document.getElementById("fa-mars").style.color = "#000000";
@@ -67,3 +74,101 @@ toggleRadioInactive.addEventListener("click", () => {
   document.getElementById("fa-x").style.color = "#ffffff";
   document.getElementById("radio-user-stat-inactive").checked = true;
 });
+
+// input validation section.
+
+function validateForm() {
+  const lastName = document.getElementById("last-name").value.trim();
+  const firstName = document.getElementById("first-name").value.trim();
+  const birthDate = document.getElementById("birth-date").value;
+
+  const userSexEl = document.querySelector('input[name="user-sex"]:checked');
+  const userSex = userSexEl ? userSexEl.value : "";
+
+  const userStatEl = document.querySelector('input[name="user-stat"]:checked');
+  const userStat = userStatEl ? userStatEl.value : "";
+
+  const userName = document.getElementById("user-name").value;
+  const password = document.getElementById("user-pass").value;
+  const confPass = document.getElementById("user-pass-confirm").value;
+
+  const form = document.getElementById("employee-record-form");
+
+  let isValidate = true;
+
+  if (password !== confPass) {
+    document.getElementById("pass-val-mess").innerHTML =
+      "<span class='pass-val-mess'>Password doesn't Match! <i class='fa fa-exclamation-circle'aria-hidden='true'></i></span>";
+    document.getElementById("user-pass").classList.add("enable");
+    document.getElementById("user-pass-confirm").classList.add("enable");
+    isValidate = false;
+  } else if (password === "" && confPass === "") {
+    const passDiv = document.querySelector(".pass-val-mess");
+    !passDiv ? "" : passDiv.remove();
+  } else if (password === confPass) {
+    const passDiv = document.querySelector(".pass-val-mess");
+    !passDiv ? "" : passDiv.remove();
+  }
+
+  if (!userName) {
+    document.getElementById("user-name").classList.add("enable");
+    isValidate = false;
+  } else {
+    document.getElementById("user-name").classList.remove("enable");
+  }
+
+  if (!password || confPass !== password) {
+    document.getElementById("user-pass").classList.add("enable");
+    isValidate = false;
+  } else {
+    document.getElementById("user-pass").classList.remove("enable");
+  }
+
+  if (!confPass || confPass !== password) {
+    document.getElementById("user-pass-confirm").classList.add("enable");
+    isValidate = false;
+  } else {
+    document.getElementById("user-pass-confirm").classList.remove("enable");
+  }
+
+  // Last name
+  if (!lastName) {
+    document.getElementById("last-name").classList.add("enable");
+    isValidate = false;
+  } else {
+    document.getElementById("last-name").classList.remove("enable");
+  }
+
+  // First name
+  if (!firstName) {
+    document.getElementById("first-name").classList.add("enable");
+    isValidate = false;
+  } else {
+    document.getElementById("first-name").classList.remove("enable");
+  }
+
+  // Birth date
+  if (!birthDate || birthDate <= "1900-01-01" || birthDate >= "2100-01-01") {
+    document.getElementById("birth-date").classList.add("enable");
+    isValidate = false;
+  } else {
+    document.getElementById("birth-date").classList.remove("enable");
+  }
+
+  // Radio (sex)
+  if (!userSex) {
+    document.getElementById("radio-sex-error").classList.add("enable");
+    isValidate = false;
+  } else {
+    document.getElementById("radio-sex-error").classList.remove("enable");
+  }
+
+  if (!userStat) {
+    document.getElementById("radio-stat-error").classList.add("enable");
+    isValidate = false;
+  } else {
+    document.getElementById("radio-stat-error").classList.remove("enable");
+  }
+
+  return isValidate;
+}
