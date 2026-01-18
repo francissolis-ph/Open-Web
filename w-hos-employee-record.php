@@ -1,3 +1,72 @@
+<?php
+include_once "connection.php";
+
+if (isset($_POST["insert"])) {
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $employeeNo = $_POST["employee-no"];
+    $lastName = $_POST["last-name"];
+    $firstName = $_POST["first-name"];
+    $middleName = $_POST["middle-name"];
+    $suffix = $_POST["suffix"];
+    $userMail = $_POST["user-mail"];
+    $userNumber = $_POST["user-number"];
+    $birthDate = $_POST["birth-date"];
+    $userSex = $_POST["user-sex"];
+    $userName = $_POST["user-name"];
+    $userPass = $_POST["user-pass"];
+    $userPassConf = $_POST["user-pass-confirm"];
+    $userStat = $_POST["user-stat"];
+
+    $currentDateTime = (new DateTime())->format("Y-m-d H:i:s");
+
+    $sql = $conn->query("SELECT COUNT(*) AS total FROM user_acc");
+    $row = $sql->fetch_assoc();
+    $userCount = intval($row['total']);
+
+    $userId = str_pad($userCount, 11, "0", STR_PAD_LEFT);
+
+    $hashPass = password_hash($userPass, PASSWORD_DEFAULT);
+
+    if (!$userName || !$userPass || !$lastName || !$firstName || !$birthDate || !$userSex || !$userStat) {
+      die("Missing required fields!");
+    }
+
+    if (!filter_var($userMail, FILTER_VALIDATE_EMAIL)) {
+      die("Invalid email format.");
+    }
+
+    if ($userPass !== $userPassConf) {
+      die("Password is not match!");
+    }
+
+    $stmt = $conn->prepare("INSERT INTO user_acc (userid, lastname, firstname, middlename, suffix, useremail, phonenumber, birthdate, usersex, datelog, timelog, username, userpass, userstat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssssssss", $userId, $lastName, $firstName, $middleName, $suffix, $userMail, $userNumber, $birthDate, $userSex, $currentDateTime, $currentDateTime, $userName, $hashPass, $userStat);
+
+    $stmt->execute();
+    $stmt->close();
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+  }
+}
+
+?>
+
+<?php
+if (isset($_POST["update"])) {
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $employeeNo = $_POST["user-edit-id"];
+
+    $sql = $conn->query("SELECT * FROM user_acc WHERE userid=" . $employeeNo . "");
+    $updateValue = $sql->fetch_assoc();
+
+    Header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +126,7 @@
               <div class="form-top-inputs-groups">
                 <div class="input-box" id="input-box">
                   <span>User ID</span>
-                  <input type="text" class="form-input-text" name="userID" readonly />
+                  <input type="text" class="form-input-text" name="employee-no" value="" readonly />
                 </div>
                 <div class="input-box-col-2" style="display: grid; grid-template-columns: 67% 30%">
                   <div class="input-box" id="input-box">
@@ -160,7 +229,7 @@
                 </div>
               </div>
               <div class="form-buttons">
-                <button type="submit" class="submit">
+                <button type="submit" class="submit" name="insert">
                   Submit
                 </button>
                 <button type="reset" class="reset">Reset</button>
@@ -172,7 +241,6 @@
               <i class="fa-solid fa-users"></i>
               <h2>Employee Record</h2>
             </div>
-
             <div id="form-bottom-toggle-container" class="form-bottom-toggle-container">
               <div id="form-bottom-toggle-bg" class="form-bottom-toggle-bg"></div>
               <div id="form-bottom-toggle-dot" class="form-bottom-toggle-dot"></div>
@@ -183,16 +251,16 @@
       <div id="table-card" class="table-card">
         <div id="table-card-top" class="table-card-top">
           <div class="table-card-top-left">
-              <span>Search Employee</span>
-              <div>
-                 <select name="" id="" type="text" class="form-input-text" id="search-input-select">
-                  <option value="1">Employee No.</option>
-                  <option value="2">Last Name</option>
-                  <option value="3">First Name</option>
-                  <option value="4">Middle Name</option>
-                 </select>
-                <input type="text" class="form-input-text" id="search-input">
-              </div>
+            <span>Search Employee</span>
+            <div>
+              <select name="" id="" type="text" class="form-input-text" id="search-input-select">
+                <option value="1">Employee No.</option>
+                <option value="2">Last Name</option>
+                <option value="3">First Name</option>
+                <option value="4">Middle Name</option>
+              </select>
+              <input type="text" class="form-input-text" id="search-input">
+            </div>
           </div>
           <div class="table-card-top-right">
           </div>
@@ -213,27 +281,50 @@
               <th style="width: 100px;">Status</th>
               <th style="width: 100px;">Actions</th>
             </tr>
-            <tr>
-              <td class="table-employee-number">00000000001</td>
-              <td>Doe</td>
-              <td>John</td>
-              <td>Anonymous</td>
-              <td>Jr.</td>
-              <td>Male</td>
-              <td>10-10-2000</td>
-              <td>john.doe@gmail.com</td>
-              <td>09**-***-****</td>
-              <td>johndoe</td>
-              <td><p class="table-data-stat">Active</p></td>
+
+            <?php
+
+            $result = $conn->query("SELECT *, (CASE WHEN usersex = 'M' THEN 'Male' ELSE 'Female' END) as sql_user_sex, (CASE WHEN userstat = 'A' THEN 'Active' ELSE 'Inactive' END) as sql_user_stat FROM user_acc ORDER BY userid ASC");
+
+            while ($row = $result->fetch_assoc()) {
+
+              echo "
+            
+             <tr>
+              <td class='table-employee-number'>" . $row["userid"] . "</td>
+              <td>" . $row["lastname"] . "</td>
+              <td>" . $row["firstname"] . "</td>
+              <td>" . $row["middlename"] . "</td>
+              <td>" . $row["suffix"] . "</td>
+              <td>" . $row["sql_user_sex"] . "</td>
+              <td>" . $row["birthdate"] . "</td>
+              <td>" . $row["useremail"] . "</td>
+              <td>" . $row["phonenumber"] . "</td>
+              <td>" . $row["username"] . "</td>
               <td>
-                <ul id="table-action-list" class="table-action-list">
-                  <li class="table-action-edit"><i class="fa fa-pencil-square" aria-hidden="true"></i></li>
-                  <li class="table-action-inactive"><i class="fa fa-archive" aria-hidden="true"></i></li>
-                  <li class="table-action-delete"><i class="fa fa-trash" aria-hidden="true"></i></li>
-                </ul>
+                <p class='table-data-stat'>" . $row["sql_user_stat"] . "</p>
+              </td>
+              <td>
+                <form class='table-action-buttons' action='' method='post'>
+                  <input type='hidden' name='user-edit-id' value='" .  $row["userid"] . "'>
+                  <button type='submit' class='table-action-edit' name='update'>
+                    <i class='fa fa-pencil-square' aria-hidden='true'></i>
+                  </button>
+                  <button type='submit' class='table-action-inactive'>
+                    <i class='fa fa-archive' aria-hidden='true'></i>
+                  </button>
+                  <button type='submit' class='table-action-delete'>
+                    <i class='fa fa-trash' aria-hidden='true'></i>
+                  </button>
+                </form>
               </td>
             </tr>
-            <tr>
+            ";
+            };
+
+            ?>
+
+            <!-- <tr>
               <td class="table-employee-number">00000000002</td>
               <td>Doe</td>
               <td>Jane</td>
@@ -244,15 +335,25 @@
               <td>jane.doe@gmail.com</td>
               <td>09**-***-****</td>
               <td>janedoe</td>
-              <td><p class="table-data-stat">Inactive</p></td>
               <td>
-                <ul id="table-action-list" class="table-action-list">
-                  <li class="table-action-edit"><i class="fa fa-pencil-square" aria-hidden="true"></i></li>
-                  <li class="table-action-inactive"><i class="fa fa-archive" aria-hidden="true"></i></li>
-                  <li class="table-action-delete"><i class="fa fa-trash" aria-hidden="true"></i></li>
-                </ul>
+                <p class="table-data-stat">Inactive</p>
               </td>
-            </tr>
+              <td>
+                <form class="table-action-buttons" action="" method="post">
+                  <input type="hidden" name="user-edit-id" value="">
+                  <button type="submit" class="table-action-edit">
+                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                  </button>
+                  <button type="submit" class="table-action-inactive">
+                    <i class="fa fa-archive" aria-hidden="true"></i>
+                  </button>
+                  <button type="submit" class="table-action-delete">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </td>
+            </tr> -->
+
           </table>
         </div>
       </div>
