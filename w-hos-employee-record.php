@@ -39,6 +39,67 @@ if (isset($_POST["insert"])) {
       die("Password is not match!");
     }
 
+    // check if existing account user.
+
+    $stmt = $conn->prepare("SELECT COUNT(*) as user_count FROM user_acc WHERE userid = ?");
+    $stmt->bind_param("i", $employeeNo);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $row = $result->fetch_array();
+
+    $userCount = intval($row['user_count']);
+
+    if ($userCount == "1") {
+
+      $stmt = $conn->prepare(
+        "UPDATE user_acc 
+   SET lastname = ?, 
+       firstname = ?, 
+       middlename = ?, 
+       suffix = ?, 
+       useremail = ?, 
+       phonenumber = ?, 
+       birthdate = ?, 
+       usersex = ?, 
+       datelog = ?, 
+       timelog = ?, 
+       username = ?, 
+       userpass = ?, 
+       userstat = ?
+   WHERE userid = ?"
+      );
+
+      $stmt->bind_param(
+        "ssssssssssssss",
+        $lastName,
+        $firstName,
+        $middleName,
+        $suffix,
+        $userMail,
+        $userNumber,
+        $birthDate,
+        $userSex,
+        $currentDateTime,
+        $currentDateTime,
+        $userName,
+        $hashPass,
+        $userStat,
+        $employeeNo
+      );
+
+      $stmt->execute();
+      $stmt->close();
+
+      header("Location: " . $_SERVER['PHP_SELF']);
+      exit;
+      return;
+    } else {
+    }
+
+
+    // =============================
+
     $stmt = $conn->prepare("INSERT INTO user_acc (userid, lastname, firstname, middlename, suffix, useremail, phonenumber, birthdate, usersex, datelog, timelog, username, userpass, userstat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssssssssssss", $userId, $lastName, $firstName, $middleName, $suffix, $userMail, $userNumber, $birthDate, $userSex, $currentDateTime, $currentDateTime, $userName, $hashPass, $userStat);
 
@@ -53,18 +114,31 @@ if (isset($_POST["insert"])) {
 ?>
 
 <?php
+// if (isset($_POST["update"])) {
+
+//   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $employeeNo = $_POST["user-edit-id"];
+
+//     $sql = mysqli_query($conn, "SELECT * FROM user_acc WHERE userid=" . $employeeNo . "");
+//     $result = mysqli_fetch_assoc($sql);
+//   }
+// }
+?>
+
+<?php
+$row = NULL;
+
 if (isset($_POST["update"])) {
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $employeeNo = $_POST["user-edit-id"];
+  $id = $_POST["user-edit-id"];
 
-    $sql = $conn->query("SELECT * FROM user_acc WHERE userid=" . $employeeNo . "");
-    $updateValue = $sql->fetch_assoc();
+  $stmt = $conn->prepare("SELECT * FROM user_acc WHERE userid = ?");
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
 
-    Header("Location: " . $_SERVER['PHP_SELF']);
-    exit;
-  }
-}
+  $result = $stmt->get_result();
+  $row = $result->fetch_array();
+};
 ?>
 
 <!DOCTYPE html>
@@ -126,46 +200,46 @@ if (isset($_POST["update"])) {
               <div class="form-top-inputs-groups">
                 <div class="input-box" id="input-box">
                   <span>User ID</span>
-                  <input type="text" class="form-input-text" name="employee-no" value="" readonly />
+                  <input type="text" id="checkEmployeeId" class="form-input-text" name="employee-no" value="<?= htmlspecialchars($row['userid'] ?? '') ?>" readonly />
                 </div>
                 <div class="input-box-col-2" style="display: grid; grid-template-columns: 67% 30%">
                   <div class="input-box" id="input-box">
                     <span>Last Name</span>
                     <input type="text" class="form-input-text" name="last-name" id="last-name" placeholder="e.g., Doe"
-                      maxlength="50" autocomplete="off" />
+                      maxlength="50" autocomplete="off" value="<?= htmlspecialchars($row['lastname'] ?? '') ?>" />
 
                   </div>
                   <div class="input-box" id="input-box">
                     <span>Suffix</span>
                     <input type="text" class="form-input-text" name="suffix" id="suffix" maxlength="10"
-                      autocomplete="off" />
+                      autocomplete="off" value="<?= htmlspecialchars($row['suffix'] ?? '') ?>" />
                   </div>
                 </div>
                 <div class="input-box" id="input-box">
                   <span>First Name</span>
                   <input type="text" class="form-input-text" name="first-name" id="first-name" placeholder="e.g., John"
-                    maxlength="50" autocomplete="off" />
+                    maxlength="50" autocomplete="off" value="<?= htmlspecialchars($row['firstname'] ?? '') ?>" />
                 </div>
                 <div class="input-box" id="input-box">
                   <span>Middle Name</span>
                   <input type="text" class="form-input-text" name="middle-name" id="middle-name" maxlength="50"
-                    autocomplete="off" />
+                    autocomplete="off" value="<?= htmlspecialchars($row['middlename'] ?? '') ?>">
                 </div>
               </div>
               <div class="form-top-inputs-groups">
                 <div class="input-box" id="input-box">
                   <span>Email Address</span>
                   <input type="email" class="form-input-text" name="user-mail" id="user-mail"
-                    placeholder="e.g., sample-email@gmail.com" maxlength="250" autocomplete="off" />
+                    placeholder="e.g., sample-email@gmail.com" maxlength="250" autocomplete="off" value="<?= htmlspecialchars($row['useremail'] ?? '') ?>" />
                 </div>
                 <div class="input-box" id="input-box">
                   <span>Phone Number</span>
                   <input type="number" class="form-input-text" name="user-number" id="user-number"
-                    placeholder="####-###-####" maxlength="11" />
+                    placeholder="####-###-####" maxlength="11" value="<?= htmlspecialchars($row['phonenumber'] ?? '') ?>" />
                 </div>
                 <div class="input-box" id="input-box">
                   <span>Date of Birth</span>
-                  <input type="date" class="form-input-text" name="birth-date" id="birth-date" />
+                  <input type="date" class="form-input-text" name="birth-date" id="birth-date" value="<?= htmlspecialchars($row['birthdate'] ?? '') ?>" />
                 </div>
                 <div class="input-box" id="input-box">
                   <span>Gender</span>
@@ -181,10 +255,11 @@ if (isset($_POST["update"])) {
                   </div>
                   <span id="radio-sex-error" class="radio-sex-error">Please Select Gender!<i
                       class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
-                  <div style="display: none">
-                    <input type="radio" class="form-input-radio" id="form-input-radio-male" name="user-sex" value="M" />
+                  <div hidden>
+                    <input type="text" name="hidden-sex" id="hidden-sex" value="<?= htmlspecialchars($row['usersex'] ?? '') ?>">
+                    <input type="radio" class="form-input-radio" id="form-input-radio-male" name="user-sex" value="M" <?php echo (!empty($row) && $row['usersex'] === 'M') ? 'checked' : ''; ?> />
                     <input type="radio" class="form-input-radio" id="form-input-radio-female" name="user-sex"
-                      value="F" />
+                      value="F" <?php echo (!empty($row) && $row['usersex'] === 'F') ? 'checked' : ''; ?> />
                   </div>
                 </div>
               </div>
@@ -192,12 +267,12 @@ if (isset($_POST["update"])) {
                 <div class="input-box" id="input-box">
                   <span>Username</span>
                   <input type="text" class="form-input-text" id="user-name" name="user-name" maxlength="50"
-                    autocomplete="off" />
+                    autocomplete="off" value="<?= htmlspecialchars($row['username'] ?? '') ?>" />
                 </div>
                 <div class="input-box" id="input-box">
                   <span>Password</span>
                   <input type="password" class="form-input-text" id="user-pass" name="user-pass"
-                    autocomplete="new-password" />
+                    autocomplete="new-password" value="<?= htmlspecialchars($row['userpass'] ?? '') ?>" />
                 </div>
                 <div style="display: flex; justify-content: end;" id="pass-val-mess">
 
@@ -220,11 +295,12 @@ if (isset($_POST["update"])) {
                   </div>
                   <span id="radio-stat-error" class="radio-stat-error">Please Select Status!<i
                       class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
-                  <div style="display: none">
+                  <div hidden>
+                    <input type="text" name="hidden-stat" id="hidden-stat" value="<?= htmlspecialchars($row['userstat'] ?? '') ?>">
                     <input type="radio" class="form-input-radio" name="user-stat" id="radio-user-stat-active"
-                      value="A" />
+                      value="A" <?php echo (!empty($row) && $row['userstat'] === 'A') ? 'checked' : ''; ?> />
                     <input type="radio" class="form-input-radio" name="user-stat" id="radio-user-stat-inactive"
-                      value="I" />
+                      value="I" <?php echo (!empty($row) && $row['userstat'] === 'I') ? 'checked' : ''; ?> />
                   </div>
                 </div>
               </div>
@@ -305,7 +381,7 @@ if (isset($_POST["update"])) {
                 <p class='table-data-stat'>" . $row["sql_user_stat"] . "</p>
               </td>
               <td>
-                <form class='table-action-buttons' action='' method='post'>
+                <form class='table-action-buttons' method='POST'>
                   <input type='hidden' name='user-edit-id' value='" .  $row["userid"] . "'>
                   <button type='submit' class='table-action-edit' name='update'>
                     <i class='fa fa-pencil-square' aria-hidden='true'></i>

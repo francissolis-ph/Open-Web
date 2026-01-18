@@ -159,3 +159,10 @@ $row = mysqli_fetch_assoc($result);
     };
 
     ?>
+
+
+<!-- gamitin kapag retrieval ng radio ang gagamitin mo. -->
+<?php echo (!empty($row) && $row['userstat'] === 'A') ? 'checked' : ''; ?> 
+
+<!-- gamitin kapag text/string ang gagamitin mo. -->
+<?= htmlspecialchars($row['userpass'] ?? '') ?>

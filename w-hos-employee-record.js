@@ -7,6 +7,47 @@ toggleButton.addEventListener("click", () => {
   slideCard.classList.toggle("enable");
 });
 
+// this is for the update load, kapag nagload ka ng userid, kukunin nya ung data kung may laman, at kung mayroon, iloload nya yung slide.
+const checkUpdate = document.querySelector("#checkEmployeeId");
+//console.log(checkUpdate.value);
+
+if (checkUpdate.value !== "") {
+  toggleButton.classList.toggle("enable");
+  toggleButtonBg.classList.toggle("enable");
+  slideCard.classList.toggle("enable");
+}
+
+const checkSex = document.querySelector("#hidden-sex");
+// console.log(checkSex.value);
+
+const checkStat = document.querySelector("#hidden-stat");
+// console.log(checkStat.value);
+
+if (checkSex.value === "M") {
+  document.getElementById("user-sex-male").style.backgroundColor = "#336699";
+  document.getElementById("fa-mars").style.color = "#ffffff";
+  document.getElementById("form-input-radio-male").checked = true;
+} else {
+  document.getElementById("user-sex-female").style.backgroundColor = "#ff6666";
+  document.getElementById("fa-venus").style.color = "#ffffff";
+  document.getElementById("form-input-radio-female").checked = true;
+}
+
+if (checkStat.value === "A") {
+  document.getElementById("user-stat-active").style.backgroundColor = "#008000";
+  document.getElementById("fa-check").style.color = "#ffffff";
+  document.getElementById("radio-user-stat-active").checked = true;
+} else {
+  document.getElementById("user-stat-inactive").style.backgroundColor =
+    "#b30000";
+  document.getElementById("fa-x").style.color = "#ffffff";
+  document.getElementById("radio-user-stat-inactive").checked = true;
+}
+
+// document.getElementById("user-sex-male").style.backgroundColor = "#336699";
+// document.getElementById("fa-mars").style.color = "#ffffff";
+// document.getElementById("form-input-radio-male").checked = true;
+
 // const userSexMale = document.querySelector("#user-sex-male");
 // userSexMale.addEventListener("click", () => {
 //   const userSexId = document.getElementById(userSexMale.id);
@@ -20,11 +61,33 @@ toggleButton.addEventListener("click", () => {
 //   }
 // });
 
+function resetInputs() {
+  const textInputs = document.querySelectorAll(".form-input-text");
+  textInputs.forEach((element) => {
+    console.log(element.value);
+  });
+}
+function resetRadioSex() {
+  const textInputs = document.querySelectorAll(".input-box-radio-sex");
+  textInputs.forEach((element) => {
+    console.log(element.value);
+  });
+}
+function resetRadioStat() {
+  const textInputs = document.querySelectorAll(".input-box-radio-stat");
+  textInputs.forEach((element) => {
+    console.log(element.value);
+  });
+}
+
 const resetButton = document
   .querySelector(".reset")
   .addEventListener("click", function () {
     disableSexRadio();
     disableStatRadio();
+    resetInputs();
+    resetRadioSex();
+    resetRadioStat();
   });
 
 function disableSexRadio() {
@@ -210,16 +273,3 @@ searchButtonId.addEventListener("keydown", (Event) => {
     console.log("keydown!");
   }
 });
-
-const editButtons = document.querySelectorAll(".table-action-edit");
-
-editButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    //  get row number and pwede mo kunin yung same row column value nya, parang...
-    //  dw_1.getitem(i) sa powerscript.
-    const row = btn.closest("tr"); // or ".table-row"
-    const employeeId = row.querySelector(".table-employee-number").textContent.trim();
-    console.log(employeeId);
-  });
-});
-
